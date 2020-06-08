@@ -178,4 +178,25 @@ public class QuizGame {
                 break;
         }
     }
+    
+    public void checkScore(int ply, boolean end){
+        if (ply == 1){
+            if (score1==10){
+                System.out.println("Player 1 Wins!");
+            }
+        }
+        if (ply == 2){
+            if (score1==10){
+                System.out.println("Player 2 Wins!");
+            }
+        }
+        if (end == true){
+            if (score1 > score2){
+                System.out.println("Player 1 Wins!");
+            }
+            if (score2 > score1){
+                System.out.println("Player 2 Wins!");
+            }
+        }
+    }
 }

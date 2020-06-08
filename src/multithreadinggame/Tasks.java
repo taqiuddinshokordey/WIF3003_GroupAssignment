@@ -11,14 +11,19 @@ package multithreadinggame;
  */
 public class Tasks implements Runnable {
     QuizGame ref;
+    int ply;
+    boolean end;
+            
+            
     
-    public Tasks(QuizGame r){
+    public Tasks(QuizGame r, int i, boolean b){
         ref = r;
+        ply = i;
+        end = b;
     }
     
     @Override
     public void run(){
-        
-        System.out.println("");
+        ref.checkScore(ply, end);
     }
 }
