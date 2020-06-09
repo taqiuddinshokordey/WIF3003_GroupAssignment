@@ -13,8 +13,19 @@ package multithreadinggame;
 public class VictoryScreen extends javax.swing.JFrame {
 
     /** Creates new form VictoryScreen */
-    public VictoryScreen() {
+    
+    QuizGame game;
+    
+    public VictoryScreen(){
         initComponents();
+    }
+    
+    public VictoryScreen(QuizGame game) {
+        if (this.game == null){
+            this.game = game;
+        }
+        initComponents();
+        checkScore();
     }
 
     /** This method is called from within the constructor to
@@ -74,6 +85,21 @@ public class VictoryScreen extends javax.swing.JFrame {
         new StartMenu().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void checkScore(){
+//        int num1 = game.score1;
+//        int num2 = game.score2;
+        
+        if (game.score1 > game.score2){
+            jLabel1.setText("Player 1 Wins!");
+        }
+        if (game.score1 < game.score2){
+            jLabel1.setText("Player 2 Wins!");
+        }
+        else if (game.score1 < game.score2){
+            jLabel1.setText("It's a Draw!");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -111,7 +137,7 @@ public class VictoryScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
 }

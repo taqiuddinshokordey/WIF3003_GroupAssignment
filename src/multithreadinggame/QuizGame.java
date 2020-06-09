@@ -10,8 +10,8 @@ package multithreadinggame;
  * @author User
  */
 public class QuizGame {
-    int score1;
-    int score2;
+    int score1 = 0;
+    int score2 = 0;
     String qtn;
     String a;
     String b;
@@ -27,80 +27,82 @@ public class QuizGame {
         
         switch (i){
             case 0:
-                qtn = "test quiz";
-                a = "correct";
-                b = "wrong";
-                c = "wrong";
-                d = "wrong";
+                qtn = "In which movie would you\n" + "hear the song 'Hakuna Matata'?";
+                a = "Lion King";
+                b = "Hercules";
+                c = "Beauty and The Beast";
+                d = "Mulan";
                 break;
             case 1:
-                qtn = "test quiz";
-                a = "wrong";
-                b = "correct";
-                c = "wrong";
-                d = "wrong";
+                qtn = "Which type of scientist\n" + "studies and forecasts the\n" + "weather?";
+                a = "Astronomer";
+                b = "Meteorologist";
+                c = "Astrologist";
+                d = "Biologist";
                 break;
             case 2:
-                qtn = "test quiz";
-                a = "wrong";
-                b = "wrong";
-                c = "wrong";
-                d = "correct";
+                qtn = "What color would you get\n"+"if you mixed red and\n"+"yellow together?";
+                a = "Gray";
+                b = "Pink";
+                c = "Deeper Shade of Yellow";
+                d = "Orange";
                 break;
             case 3:
-                qtn = "test quiz";
-                a = "correct";
-                b = "wrong";
-                c = "wrong";
-                d = "wrong";
+                qtn = "What is the name of\n"+"the dog in Garfield?";
+                a = "Odie";
+                b = "Oliver";
+                c = "Tyson";
+                d = "Fred";
                 break;
             case 4:
-                qtn = "test quiz";
-                a = "wrong";
-                b = "wrong";
-                c = "correct";
-                d = "wrong";
+                qtn = "Which one of these characters\n"+"is not friends with\n"+"Harry Potter?";
+                a = "Ron Weasley";
+                b = "Neville Longbottom";
+                c = "Draco Malfoy";
+                d = "Hermione Granger";
                 break;
             case 5:
-                qtn = "test quiz";
-                a = "wrong";
-                b = "wrong";
-                c = "wrong";
-                d = "correct";
+                qtn = "What is the color of\n"+"Donald Duck’s bowtie?";
+                a = "Yellow";
+                b = "Blue";
+                c = "White";
+                d = "Red";
                 break;    
             case 6:
-                qtn = "test quiz";
-                a = "wrong";
-                b = "wrong";
-                c = "wrong";
-                d = "correct";
+                qtn = "The Powerpuff Girls are\n"+"3 distinct colors.\n"+"What are they?";
+                a = "Red, yellow, green";
+                b = "Yellow, blue, green";
+                c = "Green, purple, orange";
+                d = "Blue, green, red";
                 break;    
             case 7:
-                qtn = "test quiz";
-                a = "wrong";
-                b = "correct";
-                c = "wrong";
-                d = "wrong";
+                qtn = "Which boyband sings the\n"+"song “I Want It That Way”?";
+                a = "One Direction";
+                b = "Backstreet Boys";
+                c = "NSYNC";
+                d = "New Kids On The Block";
                 break;    
             case 8:
-                qtn = "test quiz";
-                a = "wrong";
-                b = "correct";
-                c = "wrong";
-                d = "wrong";
+                qtn = "What is the longest\n"+"river in the world?";
+                a = "Amazon";
+                b = "Nile";
+                c = "Congo";
+                d = "Hudson";
                 break;    
             case 9:
-                qtn = "test quiz";
-                a = "wrong";
-                b = "wrong";
-                c = "correct";
-                d = "wrong";
-                break;    
+                qtn = "According to Phineas and Ferb,\n"+"there are __ days of\n"+"summer vacation?";
+                a = "90";
+                b = "103";
+                c = "104";
+                d = "110";
+                break;  
+            default:
+                break;
         } 
         
     }
     
-    public void checkAnswer(int i, String ans, int ply){
+    public void checkAnswer(int i, int ply, String ans){
         
         
         switch (i){

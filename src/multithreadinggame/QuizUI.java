@@ -26,13 +26,19 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     String b;
     String c;
     String d;
+    int num1 = 0;
+    int num2 = 0;
+    String score1 = "0"; 
+    String score2 = "0"; 
     
     public QuizUI() {
         if (game == null){
             game = new QuizGame();
         }
-        questions(0);
+        
         initComponents();
+        questions1(0);
+        questions2(0);
     }
 
     /**
@@ -60,12 +66,12 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -74,22 +80,25 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
             }
         });
 
-        jLabel10.setText("jLabel10");
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel10.setText("Def");
 
-        jLabel9.setText("jLabel9");
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setText("def");
 
-        jLabel8.setText("jLabel8");
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel8.setText("def");
 
-        jLabel7.setText("jLabel7");
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setText("def");
 
-        jLabel6.setText(d);
+        jLabel6.setText("def");
 
-        jLabel5.setText(c);
+        jLabel5.setText("def");
 
-        jLabel4.setText(b);
+        jLabel4.setText("def");
 
-        a = "test answer";
-        jLabel3.setText(a);
+        jLabel3.setText("def");
 
         jButton1.setText("Victory Test");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -108,22 +117,24 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
 
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextArea2.setRows(5);
+        jTextArea2.setText("Some trivia questions");
         jScrollPane2.setViewportView(jTextArea2);
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-        jTextArea1.setText(qtn);
 
         jLabel11.setText("Score:");
 
         jLabel12.setText("Score:");
 
-        jLabel13.setText("jLabel13");
+        jLabel13.setText("0 Pts");
 
-        jLabel14.setText("jLabel14");
+        jLabel14.setText("0 Pts");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -134,34 +145,27 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(31, 31, 31)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62))
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(31, 31, 31))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(244, 244, 244))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(237, 237, 237))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel7)))
+                .addGap(62, 62, 62))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,10 +191,9 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(33, 33, 33)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
@@ -198,32 +201,32 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                             .addComponent(jLabel14))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)))
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
+                        .addGap(112, 112, 112)
                         .addComponent(jButton1)))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel10))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -244,31 +247,69 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void myInitComponents(){
+        
+        
+    }
+    
     private void pressA(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pressA
         
     }//GEN-LAST:event_pressA
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //this.dispose();
-        //new VictoryScreen().setVisible(true);
-        questions(1);
+        this.dispose();
+        new VictoryScreen(game).setVisible(true);
+        //questions(1);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void questions(int i){
+    public void endGame(){
+        this.dispose();
+        new VictoryScreen(game).setVisible(true);
+    }
+    
+    //To load questions for player 1
+    public void questions1(int i){
         game.question(i);
         
-        String qtn = game.qtn.toString();
-        String a = game.a.toString();
-        String b = game.b.toString();
-        String c = game.c.toString();
-        String d = game.d.toString();
+        qtn = game.qtn.toString();
+        a = game.a.toString();
+        b = game.b.toString();
+        c = game.c.toString();
+        d = game.d.toString();
         
         
-        //jTextArea1.setText("test");
-//        jLabel3.setText("A. test");
-//        jLabel4.setText("B. test");
-//        jLabel5.setText("C. test");
-//        jLabel6.setText("D. test");
+        jTextArea1.setText(qtn);
+        jLabel3.setText("A. " + a);
+        jLabel4.setText("B. " + b);
+        jLabel5.setText("C. " + c);
+        jLabel6.setText("D. " + d);
+    }
+    
+    //To load questions for player 2
+    public void questions2(int i){
+        game.question(i);
+        
+        qtn = game.qtn.toString();
+        a = game.a.toString();
+        b = game.b.toString();
+        c = game.c.toString();
+        d = game.d.toString();
+        
+        
+        jTextArea2.setText(qtn);
+        jLabel7.setText("A. " + a);
+        jLabel8.setText("B. " + b);
+        jLabel9.setText("C. " + c);
+        jLabel10.setText("D. " + d);
+    }
+    
+    public void checkAnswer(int i, int ply, String ans){
+        game.checkAnswer(i, ply, ans);
+        score1 = String.valueOf(game.score1);
+        score2 = String.valueOf(game.score2);
+        jLabel13.setText(score1 + " pts");
+        jLabel14.setText(score2 + " pts");
     }
     
     /**
@@ -314,8 +355,8 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    public javax.swing.JLabel jLabel13;
+    public javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -333,6 +374,8 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
 
+    
+    
     @Override
     public void keyTyped(KeyEvent e) {
         //To change body of generated methods, choose Tools | Templates.
@@ -344,29 +387,60 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         //button for player 1
         if (keyCode == KeyEvent.VK_W){
             System.out.println("A");
+            checkAnswer(num1, 1, "A");
+            num1++;
+            questions1(num1);
         }
         if (keyCode == KeyEvent.VK_A){
             System.out.println("B");
+            checkAnswer(num1, 1, "B");
+            num1++;
+            questions1(num1);
         }
         if (keyCode == KeyEvent.VK_S){
             System.out.println("C");
+            checkAnswer(num1, 1, "C");
+            num1++;
+            questions1(num1);
         }
         if (keyCode == KeyEvent.VK_D){
             System.out.println("D");
+            checkAnswer(num1, 1, "D");
+            num1++;
+            questions1(num1);
         }
         
         //button for player 2
         if (keyCode == KeyEvent.VK_UP){
             System.out.println("A");
+            checkAnswer(num2, 2, "A");
+            num2++;
+            questions2(num2);
         }
         if (keyCode == KeyEvent.VK_LEFT){
             System.out.println("B");
+            checkAnswer(num2, 2, "B");
+            num2++;
+            questions2(num2);
         }
         if (keyCode == KeyEvent.VK_DOWN){
             System.out.println("C");
+            checkAnswer(num2, 2, "C");
+            num2++;
+            questions2(num2);
         }
         if (keyCode == KeyEvent.VK_RIGHT){
             System.out.println("D");
+            checkAnswer(num2, 2, "D");
+            num2++;
+            questions2(num2);
+        }
+        
+        if (num1 > 9){
+            endGame();
+        }
+        if (num2 > 9){
+            endGame();
         }
         
     }
