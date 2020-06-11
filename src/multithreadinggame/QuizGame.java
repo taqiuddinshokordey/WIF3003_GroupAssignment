@@ -17,6 +17,8 @@ public class QuizGame {
     String b;
     String c;
     String d;
+    String str1 ="";
+    String str2 ="";
     
     
     public QuizGame(){
@@ -110,11 +112,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "A"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "A"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;
@@ -122,11 +132,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "B"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "B"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;
@@ -134,11 +152,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "D"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "D"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;
@@ -146,11 +172,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "A"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "A"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;
@@ -158,11 +192,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "C"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "C"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;
@@ -170,11 +212,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "D"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "D"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;    
@@ -182,11 +232,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "D"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "D"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;    
@@ -194,11 +252,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "B"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "B"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;    
@@ -206,11 +272,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "B"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "B"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;    
@@ -218,11 +292,19 @@ public class QuizGame {
                 if(ply == 1){
                     if (ans == "C"){
                     score1++;
+                    str1 = "Correct!";
+                    }
+                    else{
+                        str1 = "Wrong!";
                     }
                 }
                 if(ply == 2){
                     if (ans == "C"){
                     score2++;
+                    str2 = "Correct!";
+                    }
+                    else{
+                        str2 = "Wrong!";
                     }
                 }
                 break;
