@@ -40,6 +40,7 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     String d;
     int num1 = 0;
     int num2 = 0;
+    int time;
     String score1 = "0"; 
     String score2 = "0"; 
     ExecutorService service;
@@ -50,11 +51,12 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     Future<?> future1;
     Future<?> future2;
     
-    public QuizUI(int num) {
+    public QuizUI(int num, int t) {
         if (game == null){
             game = new QuizGame();
         }
         service = Executors.newFixedThreadPool(num);
+        time = t;
         initComponents();
         questions1(0);
         questions2(0);
@@ -313,11 +315,11 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     public void timer (int ply){
         
        jProgressBar1.setMinimum(0);
-       jProgressBar1.setMaximum(10);
+       jProgressBar1.setMaximum(time);
        jProgressBar2.setMinimum(0);
-       jProgressBar2.setMaximum(10);
-       int x = 10;
-       int t = 10;
+       jProgressBar2.setMaximum(time);
+       int x = time;
+       int t = time;
        
        if (num1 > 9){
             endGame();
@@ -342,6 +344,9 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                 } catch (Exception e) {
             }
         }
+        if (future1.isCancelled()){
+            return;
+        }
             num1++;
             jLabel15.setForeground(Color.red);
             jLabel15.setText("Time's up!");
@@ -360,6 +365,9 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                 sleep(1000);
             } catch (Exception e) {
             }
+        }
+        if (future2.isCancelled()){
+            return;
         }
         num2++;
         jLabel16.setForeground(Color.red);
@@ -499,7 +507,7 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuizUI(10).setVisible(true);
+                new QuizUI(10,10).setVisible(true);
             }
         });
     }
