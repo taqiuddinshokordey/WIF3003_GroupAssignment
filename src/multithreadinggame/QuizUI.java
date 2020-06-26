@@ -30,19 +30,21 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     /**
      * Creates new form QuizUI
      */
+    
+    
     QuizGame game;
-    String qtn;
-    String str1;
-    String str2;
-    String a;
-    String b;
-    String c;
-    String d;
-    int num1 = 0;
-    int num2 = 0;
-    int time;
-    String score1 = "0"; 
-    String score2 = "0"; 
+    String qtn; //variable for question
+    String str1; //variable for correct or wrong text
+    String str2; //variable for correct or wrong text
+    String a; //variable for the answer
+    String b; //variable for the answer
+    String c; //variable for the answer
+    String d; //variable for the answer
+    int num1 = 0; //variable for question number
+    int num2 = 0; //variable for question number
+    int time; //variable for timer(second)
+    String score1 = "0"; //variable for score
+    String score2 = "0"; //variable for score
     ExecutorService service;
     timerTasks timer2 = new timerTasks(this, 2);
     timerTasks timer1 = new timerTasks(this, 1);
@@ -330,9 +332,11 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
             return;
        }
        
+       //Timer countdown for player 1
        if (ply == 1){
            jProgressBar1.setValue(0);
         for(; x >=0; x--){
+            //stops the loop and exit method when canncelled
             if (future1.isCancelled()){
                        return;
             }
@@ -344,18 +348,23 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                 } catch (Exception e) {
             }
         }
+        //exit method when canncelled
         if (future1.isCancelled()){
             return;
         }
+        
+        //load next question when time runs out
             num1++;
             jLabel15.setForeground(Color.red);
             jLabel15.setText("Time's up!");
             questions1(num1);
        }
        
+       //Timer countdown for player 2
        else if (ply == 2){
            jProgressBar2.setValue(0);
         for(; t >=0; t--){
+            //stops the loop and exit method when canncelled
             if (future2.isCancelled()){
                        return;
             }
@@ -366,9 +375,12 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
             } catch (Exception e) {
             }
         }
+        //exit method when canncelled
         if (future2.isCancelled()){
             return;
         }
+        
+        //load next question when time runs out
         num2++;
         jLabel16.setForeground(Color.red);
         jLabel16.setText("Time's up!");
@@ -433,6 +445,8 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         score2 = String.valueOf(game.score2);
         str1 = game.str1.toString();
         str2 = game.str2.toString();
+        
+        //Check answer for player 1
         if(ply == 1){
             //cancels the thread for timer
             future1.cancel(Boolean.TRUE);
@@ -450,6 +464,8 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                jLabel15.setText(str1); 
             }
         }
+        
+        //Check answer for player 2
         if (ply == 2){
             //cancels the thread for timer
             future2.cancel(Boolean.TRUE);
