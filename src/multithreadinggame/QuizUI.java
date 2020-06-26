@@ -463,16 +463,7 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                jLabel16.setText(str2); 
             }
         }
-        
-//        t.notify();
-//        if (game.end==false){
-//            try {
-//                t.wait();
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(QuizUI.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-        
+
     }
     
     /**
