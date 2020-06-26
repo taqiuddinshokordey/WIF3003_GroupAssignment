@@ -9,6 +9,14 @@ package multithreadinggame;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import static java.lang.Thread.sleep;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import javax.swing.KeyStroke;
 import javax.swing.JComponent;
 
@@ -16,6 +24,7 @@ import javax.swing.JComponent;
  *
  * @author User
  */
+//Holds the game's main UI and core function
 public class QuizUI extends javax.swing.JFrame implements KeyListener{
 
     /**
@@ -33,15 +42,25 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     int num2 = 0;
     String score1 = "0"; 
     String score2 = "0"; 
+    ExecutorService service;
+    timerTasks timer2 = new timerTasks(this, 2);
+    timerTasks timer1 = new timerTasks(this, 1);
+    Tasks scoreUpdate = new Tasks(game);
+    Thread t = new Thread(scoreUpdate);
+    Future<?> future1;
+    Future<?> future2;
     
-    public QuizUI() {
+    public QuizUI(int num) {
         if (game == null){
             game = new QuizGame();
         }
-        
+        service = Executors.newFixedThreadPool(num);
         initComponents();
         questions1(0);
         questions2(0);
+        
+        
+//        t.start();
     }
 
     /**
@@ -53,6 +72,7 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel17 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -76,6 +96,10 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         jTextArea1 = new javax.swing.JTextArea();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+
+        jLabel17.setText("jLabel17");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -112,6 +136,10 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Player 1");
 
+        jProgressBar2.setForeground(new java.awt.Color(255, 0, 0));
+
+        jProgressBar1.setForeground(new java.awt.Color(255, 0, 0));
+
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -141,25 +169,31 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
+        jLabel18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel18.setText("Q1");
+
+        jLabel19.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel19.setText("Q1");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addContainerGap()
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                        .addComponent(jLabel19))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,29 +244,34 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
                     .addComponent(jLabel15)
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1))
-                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel10))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane2)
+                                .addComponent(jScrollPane1))
+                            .addComponent(jLabel19))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel10)))
+                    .addComponent(jLabel18))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
@@ -254,23 +293,85 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void myInitComponents(){
-        
-        
-    }
+    
     
     private void pressA(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pressA
         
     }//GEN-LAST:event_pressA
 
+    //ends the game and proceed to result screen
     public void endGame(){
+        future1.cancel(rootPaneCheckingEnabled);
+        future2.cancel(rootPaneCheckingEnabled);
+        //shutsdown executorService
+        service.shutdownNow();
         this.dispose();
         new VictoryScreen(game).setVisible(true);
     }
     
+    //The countdown timer for the quiz
+    public void timer (int ply){
+        
+       jProgressBar1.setMinimum(0);
+       jProgressBar1.setMaximum(10);
+       jProgressBar2.setMinimum(0);
+       jProgressBar2.setMaximum(10);
+       int x = 10;
+       int t = 10;
+       
+       if (num1 > 9){
+            endGame();
+            return;
+       }
+       if (num2 > 9){
+            endGame();
+            return;
+       }
+       
+       if (ply == 1){
+           jProgressBar1.setValue(0);
+        for(; x >=0; x--){
+            if (future1.isCancelled()){
+                       return;
+            }
+            jProgressBar1.setValue(x);
+            try {
+                System.out.println("ply 1: " + x);
+                sleep(1000);
+                    
+                } catch (Exception e) {
+            }
+        }
+            num1++;
+            jLabel15.setForeground(Color.red);
+            jLabel15.setText("Time's up!");
+            questions1(num1);
+       }
+       
+       else if (ply == 2){
+           jProgressBar2.setValue(0);
+        for(; t >=0; t--){
+            if (future2.isCancelled()){
+                       return;
+            }
+            jProgressBar2.setValue(t);
+            try {
+                System.out.println("ply 2: " + t);
+                sleep(1000);
+            } catch (Exception e) {
+            }
+        }
+        num2++;
+        jLabel16.setForeground(Color.red);
+        jLabel16.setText("Time's up!");
+        questions2(num2);
+       }
+       
+    }
+    
     //To load questions for player 1
     public void questions1(int i){
-        game.question(i);
+        game.getQuestion(i);
         
         qtn = game.qtn.toString();
         a = game.a.toString();
@@ -278,17 +379,24 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         c = game.c.toString();
         d = game.d.toString();
         
-        
+        String num = Integer.toString(i+1);
         jTextArea1.setText(qtn);
+        jLabel18.setText("Q" + num);
         jLabel3.setText("A. " + a);
         jLabel4.setText("B. " + b);
         jLabel5.setText("C. " + c);
         jLabel6.setText("D. " + d);
+        
+        //starts threading for timer
+         future1 = service.submit(timer1);
+
+           
+            
     }
     
     //To load questions for player 2
     public void questions2(int i){
-        game.question(i);
+        game.getQuestion(i);
         
         qtn = game.qtn.toString();
         a = game.a.toString();
@@ -296,21 +404,34 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         c = game.c.toString();
         d = game.d.toString();
         
-        
+        String num = Integer.toString(i+1);
         jTextArea2.setText(qtn);
+        jLabel19.setText("Q" + num);
         jLabel7.setText("A. " + a);
         jLabel8.setText("B. " + b);
         jLabel9.setText("C. " + c);
         jLabel10.setText("D. " + d);
+        
+        //starts threading for timer
+        future2 = service.submit(timer2);
+
     }
     
+    //To check the answer
     public void checkAnswer(int i, int ply, String ans){
+        
         game.checkAnswer(i, ply, ans);
         score1 = String.valueOf(game.score1);
         score2 = String.valueOf(game.score2);
         str1 = game.str1.toString();
         str2 = game.str2.toString();
         if(ply == 1){
+            //cancels the thread for timer
+            future1.cancel(Boolean.TRUE);
+            if (future1.isCancelled()){
+                System.out.println("cancelled");
+            }
+            
             if (str1 == "Correct!"){
             jLabel15.setForeground(Color.GREEN);
             jLabel15.setText(str1);
@@ -322,6 +443,8 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
             }
         }
         if (ply == 2){
+            //cancels the thread for timer
+            future2.cancel(Boolean.TRUE);
             if (str2 == "Correct!"){
             jLabel16.setForeground(Color.GREEN);
             jLabel16.setText(str2);
@@ -333,6 +456,14 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
             }
         }
         
+//        t.notify();
+//        if (game.end==false){
+//            try {
+//                t.wait();
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(QuizUI.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
         
     }
     
@@ -368,7 +499,7 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuizUI().setVisible(true);
+                new QuizUI(10).setVisible(true);
             }
         });
     }
@@ -382,6 +513,9 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     public javax.swing.JLabel jLabel14;
     public javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    public javax.swing.JLabel jLabel18;
+    public javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel4;
@@ -391,8 +525,8 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     public javax.swing.JLabel jLabel8;
     public javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JProgressBar jProgressBar2;
+    public javax.swing.JProgressBar jProgressBar1;
+    public javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JTextArea jTextArea1;
@@ -406,30 +540,32 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         //To change body of generated methods, choose Tools | Templates.
     }
 
+    //The button for the game
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         //button for player 1
         if (keyCode == KeyEvent.VK_W){
-            System.out.println("A");
+            
+            System.out.println("ply 1 Choose: A");
             checkAnswer(num1, 1, "A");
             num1++;
             questions1(num1);
         }
         if (keyCode == KeyEvent.VK_A){
-            System.out.println("B");
+            System.out.println("ply 1 Choose: B");
             checkAnswer(num1, 1, "B");
             num1++;
             questions1(num1);
         }
         if (keyCode == KeyEvent.VK_S){
-            System.out.println("C");
+            System.out.println("ply 1 Choose: C");
             checkAnswer(num1, 1, "C");
             num1++;
             questions1(num1);
         }
         if (keyCode == KeyEvent.VK_D){
-            System.out.println("D");
+            System.out.println("ply 1 Choose: D");
             checkAnswer(num1, 1, "D");
             num1++;
             questions1(num1);
@@ -437,25 +573,25 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
         
         //button for player 2
         if (keyCode == KeyEvent.VK_UP){
-            System.out.println("A");
+            System.out.println("ply 2 Choose: A");
             checkAnswer(num2, 2, "A");
             num2++;
             questions2(num2);
         }
         if (keyCode == KeyEvent.VK_LEFT){
-            System.out.println("B");
+            System.out.println("ply 2 Choose: B");
             checkAnswer(num2, 2, "B");
             num2++;
             questions2(num2);
         }
         if (keyCode == KeyEvent.VK_DOWN){
-            System.out.println("C");
+            System.out.println("ply 2 Choose: C");
             checkAnswer(num2, 2, "C");
             num2++;
             questions2(num2);
         }
         if (keyCode == KeyEvent.VK_RIGHT){
-            System.out.println("D");
+            System.out.println("ply 2 Choose: D");
             checkAnswer(num2, 2, "D");
             num2++;
             questions2(num2);

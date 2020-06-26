@@ -25,7 +25,7 @@ public class VictoryScreen extends javax.swing.JFrame {
             this.game = game;
         }
         initComponents();
-        checkScore();
+        result();
     }
 
     /** This method is called from within the constructor to
@@ -85,7 +85,7 @@ public class VictoryScreen extends javax.swing.JFrame {
         new StartMenu().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void checkScore(){
+    public void result(){
 //        int num1 = game.score1;
 //        int num2 = game.score2;
         

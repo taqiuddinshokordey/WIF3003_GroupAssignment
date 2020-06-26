@@ -10,7 +10,7 @@ package multithreadinggame;
  * @author User
  */
 public class StartMenu extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form StartMenu
      */

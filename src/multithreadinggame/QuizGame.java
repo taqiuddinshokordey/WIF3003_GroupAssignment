@@ -9,6 +9,8 @@ package multithreadinggame;
  *
  * @author User
  */
+
+//Holds the game's main asset
 public class QuizGame {
     int score1 = 0;
     int score2 = 0;
@@ -19,13 +21,14 @@ public class QuizGame {
     String d;
     String str1 ="";
     String str2 ="";
+    boolean end = false;
     
     
     public QuizGame(){
         
     }
     
-    public void question(int i){
+    public void getQuestion(int i){
         
         switch (i){
             case 0:
@@ -311,23 +314,17 @@ public class QuizGame {
         }
     }
     
-    public void checkScore(int ply, boolean end){
-        if (ply == 1){
-            if (score1==10){
-                System.out.println("Player 1 Wins!");
+    public void checkScore(){
+        
+        while (end==false){
+            if (score1==5){
+                end = true;
+                new VictoryScreen(this).setVisible(true);
             }
-        }
-        if (ply == 2){
-            if (score1==10){
-                System.out.println("Player 2 Wins!");
-            }
-        }
-        if (end == true){
-            if (score1 > score2){
-                System.out.println("Player 1 Wins!");
-            }
-            if (score2 > score1){
-                System.out.println("Player 2 Wins!");
+        
+            else if (score2==5){
+                end = true;
+                new VictoryScreen(this).setVisible(true);
             }
         }
     }

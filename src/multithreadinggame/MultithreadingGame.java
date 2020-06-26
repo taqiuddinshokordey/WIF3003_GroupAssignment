@@ -5,6 +5,8 @@
  */
 package multithreadinggame;
 
+import java.util.Scanner;
+
 /**
  *
  * @author User
@@ -15,6 +17,7 @@ public class MultithreadingGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         new StartMenu().setVisible(true);
         
     }

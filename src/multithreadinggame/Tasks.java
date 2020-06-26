@@ -5,23 +5,42 @@
  */
 package multithreadinggame;
 
+import static java.lang.Thread.sleep;
+import java.util.concurrent.Callable;
+
 /**
  *
  * @author User
  */
 public class Tasks implements Runnable {
     QuizGame ref;
-    int ply;
-    boolean end;
+//    int ply;
+//    boolean end;
       
-    public Tasks(QuizGame r, int i, boolean b){
+    public Tasks(QuizGame r){
         ref = r;
-        ply = i;
-        end = b;
+//        ply = i;
+//        end = b;
     }
     
     @Override
     public void run(){
-        ref.checkScore(ply, end);
+        ref.checkScore();
+    }
+}
+
+class timerTasks implements Runnable {
+    
+    QuizUI ref;
+    int ply;
+    public timerTasks(QuizUI r, int i){
+        ref = r;
+        ply = i;
+    }
+    
+    @Override
+    public void run(){
+        
+            ref.timer(ply);
     }
 }
