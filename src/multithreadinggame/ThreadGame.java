@@ -106,12 +106,13 @@ public class ThreadGame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        new GraphUI(Edges).setVisible(true);
+
+        //Create the UI to display the Graph line
         JFrame gui = new JFrame();
         gui.setTitle("Edge Graph Result");
         gui.setSize(1050,1050);
         
-        
+        //Drawing line for each edges
         Graph graph = new Graph(1000, 1000);
         for (Edge edge:Edges){
             graph.DrawLine(edge.tName, edge.one.x, edge.one.y, edge.two.x, edge.two.y);
