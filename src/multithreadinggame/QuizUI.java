@@ -48,8 +48,8 @@ public class QuizUI extends javax.swing.JFrame implements KeyListener{
     ExecutorService service;
     timerTasks timer2 = new timerTasks(this, 2);
     timerTasks timer1 = new timerTasks(this, 1);
-    Tasks scoreUpdate = new Tasks(game);
-    Thread t = new Thread(scoreUpdate);
+//    Tasks scoreUpdate = new Tasks(game);
+//    Thread t = new Thread(scoreUpdate);
     Future<?> future1;
     Future<?> future2;
     
